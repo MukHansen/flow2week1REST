@@ -1,14 +1,12 @@
 package entities;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-
 
 @Entity
 @NamedQuery(name = "Person.deleteAllRows", query = "DELETE from Person")
@@ -21,23 +19,26 @@ public class Person implements Serializable {
     private String firstName;
     private String lastName;
     private String phone;
-    
-    @Temporal(javax.persistence.TemporalType.DATE)
-    private Date created;
-    private Date lastEdited;
 
-    
+    private LocalDate created, lastEdited;
+
     public Person() {
     }
 
-    public Person(String firstName, String lastName, String phone, Date created, Date lastEdited) {
+    public Person(String firstName, String lastName, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+    }
+
+    public Person(String firstName, String lastName, String phone, LocalDate created, LocalDate lastEdited) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.created = created;
         this.lastEdited = lastEdited;
     }
-        
+
     public int getId() {
         return id;
     }
@@ -69,5 +70,21 @@ public class Person implements Serializable {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
+
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public LocalDate getLastEdited() {
+        return lastEdited;
+    }
+
+    public void setLastEdited(LocalDate lastEdited) {
+        this.lastEdited = lastEdited;
+    }
+
 }
